@@ -1,6 +1,6 @@
 const LEVEL = [
-    "########",
-    "#...G..#",
+    "  ######",
+    "###.G..#",
     "#..B..B#",
     "#..P...#",
     "#####.G#",
@@ -24,6 +24,11 @@ function parseMap() {
 function render() {
     const game = document.getElementById("game");
     game.innerHTML = "";
+
+    const rows = LEVEL.length;
+    const cols = LEVEL[0].length;
+    game.style.gridTemplateColumns = `repeat(${cols}, 60px)`;
+    game.style.gridTemplateRows = `repeat(${rows}, 60px)`;
 
     for (let y=0; y<LEVEL.length; y++) {
         for (let x=0; x<LEVEL[y].length; x++) {

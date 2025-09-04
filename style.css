@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 30px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    background: linear-gradient(135deg, #f7fdd5, #a1af24);
 }
 
 .container {
@@ -53,9 +53,6 @@ h1 {
 
 #game {
     display: grid;
-    grid-template-columns: repeat(8, 60px);
-    grid-template-rows: repeat(8, 60px);
-    gap: 4px;
     justify-content: center;
 }
 
@@ -66,13 +63,11 @@ h1 {
     justify-content: center;
     align-items: center;
     font-size: 28px;
-    border-radius: 10px;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.15);
     transition: all 0.2s;
 }
 
 /* 타일 색상 */
-.wall { background: #b0b0b0; }
+.wall { background: #4b4b4b; }
 .floor { background: #fff8dc; }
 .goal { background: #ffeb3b; }
 
@@ -80,6 +75,3 @@ h1 {
 .player { background: #1e90ff; color: white; font-weight: bold; display: flex; justify-content:center; align-items:center; }
 .box { background: #ff8c00; color: white; font-weight: bold; }
 .box.goal-on-box { border: 3px solid #00c853; box-sizing: border-box; }
-
-/* 마우스 오버 효과 */
-.cell:hover { transform: scale(1.05); }
