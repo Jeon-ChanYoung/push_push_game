@@ -57,14 +57,14 @@ h1 {
 }
 
 .cell {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 28px;
-    transition: all 0.2s;
+  width: 60px;
+  height: 60px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;  
+  image-rendering: pixelated;
 }
+
 
 /* 타일 색상 */
 .wall { background: #4b4b4b; }

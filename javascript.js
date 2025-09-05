@@ -1,13 +1,37 @@
 const LEVEL = [
-    "  ######",
-    "###.G..#",
-    "#..B..B#",
-    "#..P...#",
-    "#####.G#",
-    "########"
+    "81111112",
+    "7ZZZZZZ3",
+    "7XXXXXX3",
+    "7...G..3",
+    "7..B..B3",
+    "7..P...3",
+    "7.....G3",
+    "65555554"
 ];
 
+const tileMap = {
+    "1": "topWall.png",
+    "2": "topRightCorner.png",
+    "3": "rightWall.png",
+    "4": "bottomRightCorner.png",
+    "5": "bottomWall.png",
+    "6": "bottomLeftCorner.png",
+    "7": "leftWall.png",
+    "8": "topLeftCorner.png",
+    "Z": "wallPaper1.png",
+    "X": "wallPaper2.png",
+    ".": "floor.png",
+    "#": "wall.png",
+    "P": "cat.png",
+    "B": "ball.png",
+    "G": "goal.png"
+}
+
+
+
 let player = {x:0, y:0};
+let balls = [];
+let goals = [];
 
 function parseMap() {
     balls = [];
@@ -27,24 +51,29 @@ function render() {
 
     const rows = LEVEL.length;
     const cols = LEVEL[0].length;
+    game.style.display = "grid";
     game.style.gridTemplateColumns = `repeat(${cols}, 60px)`;
     game.style.gridTemplateRows = `repeat(${rows}, 60px)`;
 
     for (let y=0; y<LEVEL.length; y++) {
         for (let x=0; x<LEVEL[y].length; x++) {
+            const cell = LEVEL[y][x];
             const div = document.createElement("div");
             div.classList.add("cell");
 
-            if (isWall(x, y)) div.classList.add("wall");
-            else if (isGoal(x, y)) div.classList.add("goal");
-            else div.classList.add("floor");
-
+            if (tileMap[cell]) {
+                div.style.backgroundImage = `url('tileset/${tileMap[cell]}')`;
+                div.style.backgroundSize = "cover";
+            } 
+                    
             if (player.x === x && player.y === y) {
+                div.style.backgroundImage = `url('tileset/${tileMap["P"]}')`;
                 div.classList.add("player");
             } 
             else if (isBalls(x, y)) {
-                div.classList.add("box");
+                div.classList.add("box"); 
             }
+
             game.appendChild(div);
         }
     }
@@ -73,7 +102,8 @@ function move(dx, dy) {
 }
 
 function isWall(x, y) {
-    return LEVEL[y][x] === "#";
+    const wallChars = ["1","2","3","4","5","6","7","8","Z","X"];
+    return wallChars.includes(LEVEL[y][x]);
 }
 
 function isGoal(x, y) {
