@@ -1,13 +1,4 @@
-let LEVEL = [
-    "81111112",
-    "7ZZZZZZ3",
-    "7XXXXXX3",
-    "7...G..3",
-    "7..B..B3",
-    "7..P...3",
-    "7.....G3",
-    "65555554"
-];
+let LEVEL = LEVELS[Math.floor(Math.random() * LEVELS.length)];
 
 const tileMap = {
     "1": "topWall.png",
@@ -26,8 +17,6 @@ const tileMap = {
     "B": "ball.png",
     "G": "flag.png"
 }
-
-
 
 let player = {x:0, y:0};
 let balls = [];
@@ -134,11 +123,16 @@ function isClear() {
     return goals.every(g => isBalls(g.x, g.y));
 }
 
+// 키보드 이벤트 처리 (화살표 키 or WASD)
 document.addEventListener("keydown", e => {
-    if (e.key === "ArrowUp") move(0, -1);
-    if (e.key==="ArrowDown") move(0,1);
-    if (e.key==="ArrowLeft") move(-1,0);
-    if (e.key==="ArrowRight") move(1,0);
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+        e.preventDefault();
+    }
+
+    if (e.key === "ArrowUp" || e.key === "w") move(0, -1);
+    if (e.key==="ArrowDown" || e.key === "s") move(0,1);
+    if (e.key==="ArrowLeft" || e.key === "a") move(-1,0);
+    if (e.key==="ArrowRight"|| e.key === "d") move(1,0);
 });
 
 parseMap();
