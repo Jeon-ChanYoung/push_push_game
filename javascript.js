@@ -1,4 +1,4 @@
-const LEVEL = [
+let LEVEL = [
     "81111112",
     "7ZZZZZZ3",
     "7XXXXXX3",
@@ -24,7 +24,7 @@ const tileMap = {
     "#": "wall.png",
     "P": "cat.png",
     "B": "ball.png",
-    "G": "goal.png"
+    "G": "flag.png"
 }
 
 
@@ -36,12 +36,22 @@ let goals = [];
 function parseMap() {
     balls = [];
     goals = [];
-    LEVEL.forEach((row, y) => {
-        [...row].forEach((cell, x) => {
-            if (cell === "P") player = {x, y};
-            if (cell === "B") balls.push({x, y});
-            if (cell === "G") goals.push({x, y});
-        });
+    LEVEL = LEVEL.map((row, y) => {
+        return [...row].map((cell, x) => {
+            if (cell === "P") {
+                player = {x, y};
+                return "."; // 플레이어는 좌표만 저장하고 맵에서는 제거
+            }
+            if (cell === "B") {
+                balls.push({x, y});
+                return "."; // 박스도 제거
+            }
+            if (cell === "G") {
+                goals.push({x, y});
+                return "."; // 목표 지점도 제거
+            }
+            return cell; // 나머지는 그대로 유지
+        }).join("");
     });
 }
 
@@ -52,8 +62,8 @@ function render() {
     const rows = LEVEL.length;
     const cols = LEVEL[0].length;
     game.style.display = "grid";
-    game.style.gridTemplateColumns = `repeat(${cols}, 60px)`;
-    game.style.gridTemplateRows = `repeat(${rows}, 60px)`;
+    game.style.gridTemplateColumns = `repeat(${cols}, 65px)`;
+    game.style.gridTemplateRows = `repeat(${rows}, 65px)`;
 
     for (let y=0; y<LEVEL.length; y++) {
         for (let x=0; x<LEVEL[y].length; x++) {
@@ -66,12 +76,18 @@ function render() {
                 div.style.backgroundSize = "cover";
             } 
                     
+            if (isBalls(x, y)) {
+                div.style.backgroundImage = `url('tileset/${tileMap["B"]}')`;
+            }
+            if (isGoal(x, y)) {
+                if (isBalls(x, y)) {
+                    div.style.backgroundImage = `url('tileset/flag_on_ball.png')`;
+                } else {
+                    div.style.backgroundImage = `url('tileset/${tileMap["G"]}')`;
+                }
+            }
             if (player.x === x && player.y === y) {
                 div.style.backgroundImage = `url('tileset/${tileMap["P"]}')`;
-                div.classList.add("player");
-            } 
-            else if (isBalls(x, y)) {
-                div.classList.add("box"); 
             }
 
             game.appendChild(div);
@@ -90,7 +106,7 @@ function move(dx, dy) {
         const by = ny + dy;
 
         if (!isWall(bx, by) && !isBalls(bx, by)) {
-            balls = balls.map(b => (b.x === nx && b.y === ny)? {x:bx, y:by}: b);
+            balls = balls.map(b => (b.x === nx && b.y === ny) ? {x:bx, y:by}: b);
             player = {x:nx, y:ny};
         }
     }
