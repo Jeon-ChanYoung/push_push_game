@@ -7,10 +7,47 @@
 </head>
 <body>
     <div class="container">
-        <div id="instructions">
-            <button id="resetBtn">🔄 리셋</button>
-        </div>
         <div id="game"></div>
+
+        <div id="controls">
+            <div class="keys-group">
+                <span class="keys-label">move</span>
+                <div class="keys-set">
+                    <div class="keys-row">
+                        <div class="key" data-key="w" style="background-image:url('tileset/key_w.png')"></div>
+                    </div>
+                    <div class="keys-row">
+                        <div class="key" data-key="a" style="background-image:url('tileset/key_a.png')"></div>
+                        <div class="key" data-key="s" style="background-image:url('tileset/key_s.png')"></div>
+                        <div class="key" data-key="d" style="background-image:url('tileset/key_d.png')"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="keys-group">
+                <span class="keys-label">move</span>
+                <div class="keys-set">
+                    <div class="keys-row">
+                        <div class="key" data-key="ArrowUp" style="background-image:url('tileset/key_up.png')"></div>
+                    </div>
+                    <div class="keys-row">
+                        <div class="key" data-key="ArrowLeft" style="background-image:url('tileset/key_left.png')"></div>
+                        <div class="key" data-key="ArrowDown" style="background-image:url('tileset/key_down.png')"></div>
+                        <div class="key" data-key="ArrowRight" style="background-image:url('tileset/key_right.png')"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- R 키 -->
+            <div class="keys-group">
+                <span class="keys-label">reset</span>
+                <div class="keys-set">
+                    <div class="keys-row">
+                        <div class="key" data-key="r" style="background-image:url('tileset/key_r.png')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="levels.js"></script>

@@ -1,4 +1,10 @@
-let LEVEL = LEVELS[Math.floor(Math.random() * LEVELS.length)];
+let loadedLEVEL = LEVELS[Math.floor(Math.random() * LEVELS.length)];
+let LEVEL = cloneLevel(loadedLEVEL);
+
+function cloneLevel(level) {
+    return level.map(row => row.slice());
+}
+
 
 const tileMap = {
     "1": "topWall.png",
@@ -23,6 +29,7 @@ let balls = [];
 let goals = [];
 
 function parseMap() {
+    LEVEL = cloneLevel(loadedLEVEL);
     balls = [];
     goals = [];
     LEVEL = LEVEL.map((row, y) => {
@@ -51,8 +58,8 @@ function render() {
     const rows = LEVEL.length;
     const cols = LEVEL[0].length;
     game.style.display = "grid";
-    game.style.gridTemplateColumns = `repeat(${cols}, 65px)`;
-    game.style.gridTemplateRows = `repeat(${rows}, 65px)`;
+    game.style.gridTemplateColumns = `repeat(${cols}, 60px)`;
+    game.style.gridTemplateRows = `repeat(${rows}, 60px)`;
 
     for (let y=0; y<LEVEL.length; y++) {
         for (let x=0; x<LEVEL[y].length; x++) {
@@ -129,10 +136,40 @@ document.addEventListener("keydown", e => {
         e.preventDefault();
     }
 
+    const keyEl = document.querySelector(`.key[data-key="${e.key}"]`);
+    if (keyEl) keyEl.classList.add("active");
+
     if (e.key === "ArrowUp" || e.key === "w") move(0, -1);
     if (e.key==="ArrowDown" || e.key === "s") move(0,1);
     if (e.key==="ArrowLeft" || e.key === "a") move(-1,0);
     if (e.key==="ArrowRight"|| e.key === "d") move(1,0);
+
+    if (e.key === "r" || e.key === "R") {
+        parseMap();
+        render();
+    }
+});
+
+// 마우스 클릭 이벤트 처리
+document.querySelectorAll(".key").forEach(el => {
+    el.addEventListener("click", () => {
+        const bg = el.style.backgroundImage;
+
+        if (bg.includes("key_w") || bg.includes("key_up")) move(0, -1);
+        if (bg.includes("key_s") || bg.includes("key_down")) move(0, 1);
+        if (bg.includes("key_a") || bg.includes("key_left")) move(-1, 0);
+        if (bg.includes("key_d") || bg.includes("key_right")) move(1, 0);
+        if (bg.includes("key_r")) {
+            parseMap();
+            render();
+        }
+    });
+});
+
+// 키에서 손 뗄 때 효과 해제
+document.addEventListener("keyup", e => {
+    const keyEl = document.querySelector(`.key[data-key="${e.key}"]`);
+    if (keyEl) keyEl.classList.remove("active");
 });
 
 parseMap();

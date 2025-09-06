@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'EarlyGameBoy';
+    src: url('fonts/Early GameBoy.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -13,42 +20,9 @@ body {
     text-align: center;
 }
 
-h1 {
-    color: #ff6f61;
-    margin-bottom: 15px;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-}
-
-#instructions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
-    font-size: 16px;
-}
-
 .arrow {
     font-weight: bold;
     color: #1e90ff;
-}
-
-#resetBtn {
-    padding: 6px 14px;
-    font-size: 16px;
-    border: none;
-    border-radius: 10px;
-    background: #ffd700;
-    color: #333;
-    cursor: pointer;
-    box-shadow: 0 4px #e6c200;
-    transition: all 0.2s ease;
-}
-
-#resetBtn:hover {
-    background: #ffea00;
-    transform: translateY(-2px);
-    box-shadow: 0 6px #e6c200;
 }
 
 #game {
@@ -56,22 +30,68 @@ h1 {
     justify-content: center;
 }
 
+#controls {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.keys-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 15px;
+    background: #0f0e17;
+    border: 3px solid #eeeeee;
+    border-radius: 8px;
+}
+
+.keys-label {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #fff;
+    font-family: 'EarlyGameBoy', monospace;
+}
+
+.keys-set {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.keys-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 4px 0;
+}
+
+.key {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.2s, filter 0.2s;
+    image-rendering: pixelated;
+}
+
+.key.active {
+    transform: scale(0.9);
+    filter: brightness(0.7);
+}
+
+.key:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
 .cell {
-  width: 65px;
-  height: 65px;
+  width: 60px;
+  height: 60px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;  
   image-rendering: pixelated;
 }
-
-
-/* 타일 색상 */
-.wall { background: #4b4b4b; }
-.floor { background: #fff8dc; }
-.goal { background: #ffeb3b; }
-
-/* 객체 스타일 */
-.player { background: #1e90ff; color: white; font-weight: bold; display: flex; justify-content:center; align-items:center; }
-.box { background: #ff8c00; color: white; font-weight: bold; }
-.box.goal-on-box { border: 3px solid #00c853; box-sizing: border-box; }
