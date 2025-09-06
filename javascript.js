@@ -1,10 +1,10 @@
 let loadedLEVEL = LEVELS[Math.floor(Math.random() * LEVELS.length)];
+// let loadedLEVEL = LEVELS[2];
 let LEVEL = cloneLevel(loadedLEVEL);
 
 function cloneLevel(level) {
     return level.map(row => row.slice());
 }
-
 
 const tileMap = {
     "1": "topWall.png",
@@ -16,12 +16,16 @@ const tileMap = {
     "7": "leftWall.png",
     "8": "topLeftCorner.png",
     "Z": "wallPaper1.png",
-    "X": "wallPaper2.png",
-    ".": "floor.png",
-    "#": "wall.png",
-    "P": "cat.png",
-    "B": "ball.png",
-    "G": "flag.png"
+    "X": "wallPaper2.png",    
+    ".": "floor.png",         
+    "P": "cat.png",           // P : Player
+    "B": "ball.png",          // B : Ball
+    "G": "flag.png",          // G : Goal   
+    "L": "tableLeft.png",     // L : Left table
+    "R": "tableRight.png",    // R : Right table
+    "U": "chimneyTop.png",    // U : Up chimney
+    "D": "chimneyBottom.png",  // D : Down chimney
+    "C": "ceramics.png"        // C : Ceramics
 }
 
 let player = {x:0, y:0};
@@ -114,7 +118,7 @@ function move(dx, dy) {
 }
 
 function isWall(x, y) {
-    const wallChars = ["1","2","3","4","5","6","7","8","Z","X"];
+    const wallChars = ["1","2","3","4","5","6","7","8","Z","X","L","R","U","D","C"];
     return wallChars.includes(LEVEL[y][x]);
 }
 
