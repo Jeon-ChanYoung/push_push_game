@@ -176,5 +176,36 @@ document.addEventListener("keyup", e => {
     if (keyEl) keyEl.classList.remove("active");
 });
 
-parseMap();
-render();
+function preloadImage(paths, allImagesLoadedCallback) {
+    let loadedCount = 0;
+    const totalCount = paths.length;
+    
+    paths.forEach(path => {
+        const img = new Image();
+        img.src = path;
+        img.onload = () => {
+            loadedCount++;
+            if (loadedCount === totalCount) {
+                allImagesLoadedCallback();
+            }
+        }
+
+        img.onerror = () => {
+            console.error(`Failed to load image: ${path}`);
+            loadedCount++;
+            if (loadedCount === totalCount) {
+                allImagesLoadedCallback();
+            }
+        }
+    });
+}
+
+const allImages = Object.values(tileMap).map(filename => `tileset/${filename}`);
+allImages.push("tileset/flag_on_ball.png");
+
+// 이미지 미리 로드
+preloadImage(allImages, () => {
+    console.log("All images loaded!");
+    parseMap();
+    render();
+});
