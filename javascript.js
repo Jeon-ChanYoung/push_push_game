@@ -1,5 +1,5 @@
-let loadedLEVEL = LEVELS[Math.floor(Math.random() * LEVELS.length)];
-// let loadedLEVEL = LEVELS[2];
+// let loadedLEVEL = LEVELS[Math.floor(Math.random() * LEVELS.length)];
+let loadedLEVEL = LEVELS[3];
 let LEVEL = cloneLevel(loadedLEVEL);
 
 function cloneLevel(level) {
