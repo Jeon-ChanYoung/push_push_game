@@ -1,5 +1,5 @@
-// let loadedLEVEL = LEVELS[Math.floor(Math.random() * LEVELS.length)];
-let loadedLEVEL = LEVELS[3];
+let loadedLEVEL = LEVELS[Math.floor(Math.random() * LEVELS.length)];
+// let loadedLEVEL = LEVELS[6];
 let LEVEL = cloneLevel(loadedLEVEL);
 
 function cloneLevel(level) {
@@ -25,10 +25,17 @@ const tileMap = {
     "R": "tableRight.png",    // R : Right table
     "U": "chimneyTop.png",    // U : Up chimney
     "D": "chimneyBottom.png",  // D : Down chimney
-    "C": "ceramics.png"        // C : Ceramics
+    "C": "ceramics.png",        // C : Ceramics
+    "T": "television.png",      // T : Television
+    "N": "N_table.png",
+    "M": "M_chairLeft.png",
+    "H": "H_chairRight.png"
 }
 
-const WALL_CHARS = ["1","2","3","4","5","6","7","8","Z","X","L","R","U","D","C"];
+const WALL_CHARS = [
+    "1","2","3","4","5","6","7","8","Z","X",
+    "L","R","U","D","C","T", "N","M","H"
+];
 
 let player = {x:0, y:0};
 let balls = [];
