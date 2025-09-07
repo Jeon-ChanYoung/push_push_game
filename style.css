@@ -7,35 +7,35 @@
 
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     min-height: 100vh;
     margin: 0;
     padding: 30px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #0f0e17;
+    
 }
 
-.container {
-    text-align: center;
-}
-
-.arrow {
-    font-weight: bold;
-    color: #1e90ff;
-}
-
-#game {
-    display: grid;
+#game-container {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    background: #eeeeee;
 }
 
 #controls {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    gap: 30px;
-    margin-top: 20px;
+    align-items: center;
+    gap: 20px;
+}
+
+#controls-container {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .keys-group {
@@ -43,6 +43,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 10px 15px;
+    margin: 10px;
     background: #0f0e17;
     border: 3px solid #eeeeee;
     border-radius: 8px;

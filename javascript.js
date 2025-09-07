@@ -28,6 +28,8 @@ const tileMap = {
     "C": "ceramics.png"        // C : Ceramics
 }
 
+const WALL_CHARS = ["1","2","3","4","5","6","7","8","Z","X","L","R","U","D","C"];
+
 let player = {x:0, y:0};
 let balls = [];
 let goals = [];
@@ -79,17 +81,20 @@ function render() {
             if (isBalls(x, y)) {
                 div.style.backgroundImage = `url('tileset/${tileMap["B"]}')`;
             }
-            if (isGoal(x, y)) {
-                if (isBalls(x, y)) {
-                    div.style.backgroundImage = `url('tileset/flag_on_ball.png')`;
-                } else {
-                    div.style.backgroundImage = `url('tileset/${tileMap["G"]}')`;
-                }
-            }
             if (player.x === x && player.y === y) {
                 div.style.backgroundImage = `url('tileset/${tileMap["P"]}')`;
             }
-
+            if (isGoal(x, y)) {
+                if (isBalls(x, y)) {
+                    div.style.backgroundImage = `url('tileset/flag_on_ball.png')`;
+                } 
+                else if (player.x === x && player.y === y) {
+                    div.style.backgroundImage = `url('tileset/flag_on_cat.png')`;
+                }
+                else {
+                    div.style.backgroundImage = `url('tileset/${tileMap["G"]}')`;
+                }
+            }
             game.appendChild(div);
         }
     }
@@ -118,8 +123,7 @@ function move(dx, dy) {
 }
 
 function isWall(x, y) {
-    const wallChars = ["1","2","3","4","5","6","7","8","Z","X","L","R","U","D","C"];
-    return wallChars.includes(LEVEL[y][x]);
+    return WALL_CHARS.includes(LEVEL[y][x]);
 }
 
 function isGoal(x, y) {
@@ -202,6 +206,7 @@ function preloadImage(paths, allImagesLoadedCallback) {
 
 const allImages = Object.values(tileMap).map(filename => `tileset/${filename}`);
 allImages.push("tileset/flag_on_ball.png");
+allImages.push("tileset/flag_on_cat.png");
 
 // 이미지 미리 로드
 preloadImage(allImages, () => {
