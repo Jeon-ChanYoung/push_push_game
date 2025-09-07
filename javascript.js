@@ -170,7 +170,9 @@ document.addEventListener("keydown", e => {
     }
 
     if (e.key === "n" || e.key === "N") {
-        handleNextLevel();
+        if (isClear()) {
+            handleNextLevel();
+        }
     }
 });
 
@@ -229,6 +231,8 @@ function resetGame() {
     if (usedLevels.size === LEVELS.length) {
         alert("모든 레벨을 클리어했습니다!");
         usedLevels.clear();
+        // 프로그램 종료
+        return;
     }
 
     let nextLevel;
