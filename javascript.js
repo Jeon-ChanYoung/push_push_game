@@ -1,6 +1,6 @@
-let loadedLEVEL = LEVELS[Math.floor(Math.random() * LEVELS.length)];
-// let loadedLEVEL = LEVELS[6];
-let LEVEL = cloneLevel(loadedLEVEL);
+let loadedLEVEL;
+let LEVEL;
+let usedLevels = new Set();
 
 function cloneLevel(level) {
     return level.map(row => row.slice());
@@ -127,6 +127,10 @@ function move(dx, dy) {
     }
 
     render();
+
+    if (isClear()) {
+        enableNextButton();
+    }
 }
 
 function isWall(x, y) {
@@ -162,6 +166,11 @@ document.addEventListener("keydown", e => {
     if (e.key === "r" || e.key === "R") {
         parseMap();
         render();
+        disableNextButton();
+    }
+
+    if (e.key === "n" || e.key === "N") {
+        handleNextLevel();
     }
 });
 
@@ -177,6 +186,11 @@ document.querySelectorAll(".key").forEach(el => {
         if (bg.includes("key_r")) {
             parseMap();
             render();
+            disableNextButton();
+        }
+
+        if (bg.includes("key_n")) {
+            handleNextLevel();
         }
     });
 });
@@ -211,6 +225,41 @@ function preloadImage(paths, allImagesLoadedCallback) {
     });
 }
 
+function resetGame() {
+    if (usedLevels.size === LEVELS.length) {
+        alert("모든 레벨을 클리어했습니다!");
+        usedLevels.clear();
+    }
+
+    let nextLevel;
+    do {
+        nextLevel = LEVELS[Math.floor(Math.random() * LEVELS.length)];
+    } while (usedLevels.has(nextLevel));
+
+    usedLevels.add(nextLevel);
+    loadedLEVEL = nextLevel;
+    LEVEL = cloneLevel(loadedLEVEL);
+    parseMap();
+    render();  
+    disableNextButton(); 
+}
+
+function disableNextButton() {
+    document.getElementById("nextLevelGroup").classList.add("disabled");
+}
+
+function enableNextButton() {
+    document.getElementById("nextLevelGroup").classList.remove("disabled");
+}
+
+function handleNextLevel() {
+    if (!document.getElementById("nextLevelGroup").classList.contains("disabled")) {
+        resetGame();
+    }
+}
+
+
+
 const allImages = Object.values(tileMap).map(filename => `tileset/${filename}`);
 allImages.push("tileset/flag_on_ball.png");
 allImages.push("tileset/flag_on_cat.png");
@@ -218,6 +267,5 @@ allImages.push("tileset/flag_on_cat.png");
 // 이미지 미리 로드
 preloadImage(allImages, () => {
     console.log("All images loaded!");
-    parseMap();
-    render();
+    resetGame();
 });

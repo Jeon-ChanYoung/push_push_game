@@ -4,11 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <title>Push Push Game</title>
 </head>
 <body>
-    <div id="game-container">
-        <div id="game"></div>
-    </div>
+    <div id="main-content">
+        <div id="game-container">
+            <div id="game"></div>
+        </div>
+    
+        <div id="stateControls-container">
+            <div class="keys-group" id="nextLevelGroup">
+                <span class="keys-label">next</span>
+                <div class="keys-set">
+                    <div class="keys-row">
+                        <div class="key" data-key="n" style="background-image:url('tileset/key_n.png')"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="keys-group">
+                <span class="keys-label">reset</span>
+                <div class="keys-set">
+                    <div class="keys-row">
+                        <div class="key" data-key="r" style="background-image:url('tileset/key_r.png')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
 
     <div id="controls-container">
         <div id="controls">
@@ -36,16 +59,6 @@
                         <div class="key" data-key="ArrowLeft" style="background-image:url('tileset/key_left.png')"></div>
                         <div class="key" data-key="ArrowDown" style="background-image:url('tileset/key_down.png')"></div>
                         <div class="key" data-key="ArrowRight" style="background-image:url('tileset/key_right.png')"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- R 키 -->
-            <div class="keys-group">
-                <span class="keys-label">reset</span>
-                <div class="keys-set">
-                    <div class="keys-row">
-                        <div class="key" data-key="r" style="background-image:url('tileset/key_r.png')"></div>
                     </div>
                 </div>
             </div>
