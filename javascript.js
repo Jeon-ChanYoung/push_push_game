@@ -179,19 +179,26 @@ document.addEventListener("keydown", e => {
 // 마우스 클릭 이벤트 처리
 document.querySelectorAll(".key").forEach(el => {
     el.addEventListener("click", () => {
-        const bg = el.style.backgroundImage;
+        const key = el.dataset.key; 
 
-        if (bg.includes("key_w") || bg.includes("key_up")) move(0, -1);
-        if (bg.includes("key_s") || bg.includes("key_down")) move(0, 1);
-        if (bg.includes("key_a") || bg.includes("key_left")) move(-1, 0);
-        if (bg.includes("key_d") || bg.includes("key_right")) move(1, 0);
-        if (bg.includes("key_r")) {
+        if (key === "w" || key === "ArrowUp") {
+            move(0, -1);
+        } 
+        else if (key === "s" || key === "ArrowDown") {
+            move(0, 1);
+        } 
+        else if (key === "a" || key === "ArrowLeft") {
+            move(-1, 0);
+        } 
+        else if (key === "d" || key === "ArrowRight") {
+            move(1, 0);
+        } 
+        else if (key === "r") {
             parseMap();
             render();
             disableNextButton();
-        }
-
-        if (bg.includes("key_n")) {
+        } 
+        else if (key === "n") {
             handleNextLevel();
         }
     });
